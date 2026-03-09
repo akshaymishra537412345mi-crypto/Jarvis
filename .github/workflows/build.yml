@@ -9,13 +9,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.2'
       - name: Unzip project
         run: unzip "JarvisApp-V4-FIXED.zip" -d extracted
       - name: Build APK
         run: |
           cd extracted/JarvisV4
-          chmod +x gradlew
-          ./gradlew assembleDebug --warning-mode=none --no-daemon
+          gradle assembleDebug --warning-mode=none
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
