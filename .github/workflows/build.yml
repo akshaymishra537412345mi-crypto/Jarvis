@@ -5,17 +5,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - name: Unzip project
         run: unzip "JarvisApp-V4-FIXED.zip" -d extracted
+
+      - name: Download Gradle
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-7.6.4-bin.zip
+          unzip -q gradle-7.6.4-bin.zip
+
       - name: Build APK
         run: |
           cd extracted/JarvisV4
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          ../../gradle-7.6.4/bin/gradle assembleDebug
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
