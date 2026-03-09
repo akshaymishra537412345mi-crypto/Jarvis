@@ -20,4 +20,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: jarvis-apk
-          path: extracted/JarvisV4/app
+          path: extracted/JarvisV4/app/build/outputs/apk/debug/app-debug.apk
